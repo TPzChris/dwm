@@ -1,25 +1,40 @@
 /* See LICENSE file for copyright and license details. */
 
+#define ICONSIZE = 20;
+#define ICONSPACING = 5;
+
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const unsigned int borderpx  	= 3;        /* border pixel of windows */
+static const unsigned int gappx     	= 6;        /* gap pixel between windows */
+static const unsigned int snap      	= 32;       /* snap pixel */
+static const int showbar            	= 1;        /* 0 means no bar */
+static const int topbar             	= 1;        /* 0 means bottom bar */
+static const char *fonts[]          	= { "monospace:size=10" };
+static const char dmenufont[]       	= "monospace:size=10";
+static const char col_gray1[]       	= "#222222";
+static const char col_gray2[]       	= "#444444";
+static const char col_gray3[]       	= "#bbbbbb";
+static const char col_gray4[]       	= "#eeeeee";
+static const char col_cyan[]        	= "#005577";
+
+//DRACULA
+static const char col_background[]		= "#282a36";
+static const char col_current_line[]	= "#44475a";
+static const char col_foreground[]		= "#f8f8f2";
+static const char col_comment[]			= "#6272a4";
+static const char col_purple[]			= "#bd93f9";
+static const char col_yellow[]			= "#f1fa8c";
+
+
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_yellow, col_comment, col_gray2 },
+	[SchemeSel]  = { col_background, col_purple,  col_cyan  },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "\ue185", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -53,7 +68,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/usr/local/bin/st", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
