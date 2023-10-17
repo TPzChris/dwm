@@ -9,7 +9,7 @@ static const unsigned int gappx     	= 6;        /* gap pixel between windows */
 static const unsigned int snap      	= 32;       /* snap pixel */
 static const int showbar            	= 1;        /* 0 means no bar */
 static const int topbar             	= 1;        /* 0 means bottom bar */
-static const char *fonts[]          	= { "monospace:size=10" };
+static const char *fonts[]          	= { "monospace:size=10", "fontawesome:size=12" };
 static const char dmenufont[]       	= "monospace:size=10";
 static const char col_gray1[]       	= "#222222";
 static const char col_gray2[]       	= "#444444";
@@ -34,7 +34,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "\ue185", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "\ue185", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -43,7 +43,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       3,            0,           -1 },
+	{ "Thunar",   NULL,       NULL,       4,            0,           -1 },
 };
 
 /* layout(s) */
@@ -74,6 +75,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *web[] 	  = { "firefox", NULL };
+static const char *filemgr[]  = { "thunar", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -89,6 +92,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,		   {.v = web } },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filemgr} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -110,6 +115,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_k,      spawn,          SHCMD("pkill dwm") },
 };
 
 /* button definitions */
