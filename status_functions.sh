@@ -55,7 +55,7 @@ print_battery() {
 print_connection() {
 	WIFI_CON="$(nmcli dev wifi | grep "*")"
 	#WIRED_CON="$(ethtool eth0 | less)"
-	WIRED_CON_NAME=$(dmesg | grep eth0 | awk '(NR==2) {for(i=6;i<NF;i++){print $i}}' ORS=' ')
+	WIRED_CON_NAME=$(lspci | grep Ethernet | awk '{for(i=4;i<7;i++) {print $i}}' ORS=' ')
 	WIRED_SPEED=$(ethtool enp0s3 | grep "Speed" | awk '{print $2}')
 
 	if [ "$WIFI_CON" != "" ]; then
