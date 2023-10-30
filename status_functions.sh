@@ -63,7 +63,7 @@ print_connection() {
 		MSG="$ICON $($WIFI_CON | awk '{printf('%s', '%s', '%s', '%s', $3, $6, $9, $10}')"
 	elif [ "$WIRED_CON_NAME" != "" ]; then 
 		ICON=""
-		MSG="$ICON $WIRED_CON_NAME $WIRED_SPEED"
+		MSG="$ICON $WIRED_SPEED" #$WIRED_CON_NAME 
 	else
 		ICON=""
 		MSG="$ICON No Internet Connection"
