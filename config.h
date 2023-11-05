@@ -24,7 +24,7 @@ static const char col_foreground[]		= "#f8f8f2";
 static const char col_comment[]			= "#6272a4";
 static const char col_purple[]			= "#bd93f9";
 static const char col_yellow[]			= "#f1fa8c";
-static int ts             	            = 14;        /* Text size */
+static int ts             	            = 14;        /* Initial text size */
 
 
 static const char *colors[][3]      = {

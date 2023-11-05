@@ -223,6 +223,7 @@ static int updategeom(void);
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
 static void updatestatus(void);
+static void updatestatusshell(void);
 static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
@@ -2015,6 +2016,18 @@ updatestatus(void)
 }
 
 void
+updatestatusshell(void)
+{
+    FILE *file = fopen("./dwm/font_size.txt", "w");
+    if (file == NULL) {
+        perror("No file found");
+    }
+
+    fprintf(file, "%d", drw->ts);
+    fclose(file);
+}
+
+void
 updatetitle(Client *c)
 {
 	if (!gettextprop(c->win, netatom[NetWMName], c->name, sizeof c->name))
@@ -2152,11 +2165,11 @@ incbar(const Arg *arg)
         ts += arg->i;
         drw->ts += arg->i;
         bh += arg->i * 2;
+        updatestatusshell();
     }
     if (!drw_fontset_create(drw, fonts, LENGTH(fonts))){
         die("no fonts could be loaded.");
     }
-
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
