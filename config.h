@@ -9,7 +9,7 @@ static const unsigned int gappx     	= 6;        /* gap pixel between windows */
 static const unsigned int snap      	= 32;       /* snap pixel */
 static const int showbar            	= 1;        /* 0 means no bar */
 static const int topbar             	= 1;        /* 0 means bottom bar */
-static const char *fonts[]          	= { "monospace:size=10", "fontawesome:size=12" };
+static const char *fonts[]          	= { "monospace", "fontawesome" };
 static const char dmenufont[]       	= "monospace:size=10";
 static const char col_gray1[]       	= "#222222";
 static const char col_gray2[]       	= "#444444";
@@ -24,7 +24,7 @@ static const char col_foreground[]		= "#f8f8f2";
 static const char col_comment[]			= "#6272a4";
 static const char col_purple[]			= "#bd93f9";
 static const char col_yellow[]			= "#f1fa8c";
-
+static int ts             	            = 14;        /* Text size */
 
 
 static const char *colors[][3]      = {
@@ -123,8 +123,8 @@ static const Key keys[] = {
 	//{ MODKEY, 			XK_s,	   spawn,	   SHCMD("fd --type f --hidden --exclude .git | fzf-tmux | xargs nvim") },
 	{ MODKEY|ShiftMask,             XK_m, 	   	   spawn,      {.v = spotify }},
 	{ MODKEY|ControlMask, 			XK_space, 	   spawn, 	   {.v = setkeyboard } },
-	{ MODKEY|ControlMask, 			XK_Down,	   incbar, 	   {.i = -8 } },
-	{ MODKEY|ControlMask, 			XK_Up, 	   	   incbar, 	   {.i = +8 } },
+	{ MODKEY|ControlMask, 			XK_Down,	   incbar, 	   {.i = -2 } },
+	{ MODKEY|ControlMask, 			XK_Up, 	   	   incbar, 	   {.i = +2 } },
 };
 
 /* button definitions */

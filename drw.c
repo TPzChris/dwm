@@ -163,7 +163,27 @@ drw_fontset_create(Drw* drw, const char *fonts[], size_t fontcount)
 		return NULL;
 
 	for (i = 1; i <= fontcount; i++) {
-		if ((cur = xfont_create(drw, fonts[fontcount - i], NULL))) {
+        const char *originalString = fonts[fontcount - i];
+        const char *substringToFind = ":size=";
+
+        const char *foundPosition = strstr(originalString, substringToFind);
+        char result[32];  // Adjust the size as needed
+
+        if (foundPosition != NULL) {
+            size_t lengthBeforeSubstring = foundPosition - originalString;
+            strncpy(result, originalString, lengthBeforeSubstring);
+        } else {
+            strcpy(result, originalString);
+        }
+
+        char newFont[32];
+        int resp = snprintf(newFont, sizeof(newFont), "%s:size=%d", result, drw->ts);
+
+        if (resp < 0) {
+            abort();
+        }
+
+		if ((cur = xfont_create(drw, newFont, NULL))) {
 			cur->next = ret;
 			ret = cur;
 		}
